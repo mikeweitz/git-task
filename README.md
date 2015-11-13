@@ -45,4 +45,4 @@ Once cleared and OK'd by stakeholders, the task branch can be merged into Stage
 After final signoff, the task branch is merged into Master.  The task bracnh can then be safely deleted from the repo.
 
 
-![Branches in Git-Task](https://raw.githubusercontent.com/mikeweitz/git-task/master/diagram-01.jpg)
+![Branches in Git-Task](https://raw.githubusercontent.com/mikeweitz/git-task/master/images/diagram-01.jpg)
