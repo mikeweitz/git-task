@@ -43,3 +43,6 @@ If the code checks out, the task branch is then merged into QA for internal test
 Once cleared and OK'd by stakeholders, the task branch can be merged into Stage
   If QA logs issues, resolve in the task branch, and merged back into Dev, QA, and Stage
 After final signoff, the task branch is merged into Master.  The task bracnh can then be safely deleted from the repo.
+
+
+![Branches in Git-Task](https://raw.githubusercontent.com/mikeweitz/git-task/master/diagram-01.jpg)
