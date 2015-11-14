@@ -7,7 +7,7 @@ The core premise is that features are more important than environments.  Individ
 
 # Changelog
 v 0.0.1
-Draft concept for a git workflow that more closesly resembles the structure of work in agencies and non-software based tech teams
+Draft concept for a git workflow that more closesly resembles the structure of work in agencies and non software-based tech teams
 
 
 ## Issues this method attempts to address
