@@ -52,6 +52,8 @@ There's no difference in process - create the task, and progressively merge into
 
 ![Branches in Git-Task](https://raw.githubusercontent.com/mikeweitz/git-task/master/images/diagram-01.jpg)
 
+![Example Commit log in Git-Task](https://raw.githubusercontent.com/mikeweitz/git-task/master/images/diagram-02.jpg)
+
 ## To Do
  - Create 'git task' command files installable via NPM
     - git task start [name]: createa new branch off of master called task/[name], push to remote, and set tracking 
