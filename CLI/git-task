@@ -31,6 +31,12 @@ else
 	_ISTASK=false
 fi
 
+task () {
+	echo wrapper function
+	exit 1
+}
+
+: <<'END'
 # Start a new task
 if [ "$1" = "start" ]; then
 	if [ !$2 ]; then
@@ -71,3 +77,4 @@ elif [ "$1" = "finish" ]; then
 else
 	echo "Command ‘$1’ not found" && exit 1
 fi
+END
