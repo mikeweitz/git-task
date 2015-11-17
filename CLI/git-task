@@ -1,0 +1,73 @@
+#!/bin/bash
+#================
+: <<'END'
+Git-Task CLI : Add git-task commands to your shell
+
+Save this file in a location that's part of your $PATH
+ex on osX
+
+Select a location - I use a bin folder in my home directory:
+~/bin
+
+make sure the it's executable
+chmod +x ~/bin
+
+make sure the folder is in your bash path. in ~/.bash_profile add:
+PATH=$PATH:~/bin
+END
+#========
+
+((!$#)) && echo No parameter passed, command ignored! && exit 1
+
+#Save current branch to variable
+_BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
+_TASKPREFIX="task/"
+
+# Are we on a task bracnh:
+if [[ "$_BRANCH" == task/* ]]; then
+	_ISTASK=true
+else
+	_ISTASK=false
+fi
+
+# Start a new task
+if [ "$1" = "start" ]; then
+	if [ !$2 ]; then
+		echo "ERR: Specify a branch name for this task" && exit 1
+	fi
+	git checkout master
+	git checkout -b task/$2
+	exit 0
+# Merge work into dev
+elif [ "$1" = "dev" ]; then
+	if [ !$_ISTASK ]; then
+		echo "ERR: You must be on a task branch to run this command" && exit 1
+	fi
+	echo "Merge ’$_BRANCH‘ into dev branch" 
+	exit 0
+# Merge work into qa and dev
+elif [ "$1" = "qa" ]; then
+	if [ !$_ISTASK ]; then
+		echo "ERR: You must be on a task branch to run this command" && exit 1
+	fi
+	echo "Merge ’$_BRANCH‘ into qa, and dev branch"
+	exit 0
+# Merge work into stage, qa, and dev
+elif [ "$1" = "stage" ]; then
+	if [ !$_ISTASK ]; then
+		echo "ERR: You must be on a task branch to run this command" && exit 1
+	fi
+	echo "Merge ’$_BRANCH‘ into stage, qa, and dev branch" && exit 0
+
+# Merge work into master, stage, qa, and dev
+elif [ "$1" = "finish" ]; then
+	if [ !$_ISTASK ]; then
+		echo "ERR: You must be on a task branch to run this command" && exit 1
+	fi
+	echo "Merge '$_BRANCH' into master, stage, qa, and dev branch" && exit 0
+
+# Not a valid command
+else
+	echo "Command ‘$1’ not found" && exit 1
+fi
