@@ -15,7 +15,7 @@ Permanent environment branches are never worked on direcly.  Instead, individual
 
 
 ## Questions moving forward
-  - Should features be merged into master, or should master pull directly from Stage? This is mostly a question of how production code is reviewd. We want to deploy code that's been reviewd 'in browser'.
+  - Should features be merged into master, or should master only pull from Stage? This is mostly a question of how production code is reviewd. We want to deploy code that's been reviewd 'in browser'.
   - Can a code review system be implemented similar to a 'pull request' where develoeprs do not merge their own features into setage / master?
 
 
@@ -32,7 +32,7 @@ A task branch is any change to the codebase: New features, bugfixes, enhancement
  - Tasks are branched off of Master, so they should always inherit from live production code.  
  - Task branches are long-lived, but not premanent.  
  - Tasks branches are progressively merged into environment branches.
- - Any change in a task branch should merge into 
+ - Any change in a task branch should merge into all upstream environment branches.
  - Since tasks branch off of master, any previous task changes that occured at later approval stages should be captured by subsequent tasks
 
 
@@ -49,6 +49,13 @@ After final signoff, the task branch is merged into Master.  The task branch can
 
 #### Urgent bugfix
 There's no difference in process - create the task, and progressively merge into environment branches.
+
+
+## CLI
+There's a shell script included in the repo that provides some command line utilities for using the workflow.
+These helpers will create new task branhces off of master, merge task branches into environment branches as designated, and finsih task branches by merging into master and clearning up the branch.
+
+
 
 ![Branches in Git-Task](https://raw.githubusercontent.com/mikeweitz/git-task/master/images/diagram-01.jpg)
 

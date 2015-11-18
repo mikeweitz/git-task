@@ -14,6 +14,20 @@ chmod +x ~/bin
 
 make sure the folder is in your bash path. in ~/.bash_profile add:
 PATH=$PATH:~/bin
+
+
+Alternatively:
+This project sprang from the pain of trying to enforce a code process 
+that didn't line up with the objectives our tech team was trying 
+to achieve.
+
+If you find that to be the case, then I encourage you to design your 
+own workflow for git.  
+
+Think about how your team works, what challenges you face, and 
+how can you use Git in a way that suspports your team.  
+
+
 END
 #========
 
