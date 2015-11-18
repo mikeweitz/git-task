@@ -24,57 +24,84 @@ _BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 
 _TASKPREFIX="task/"
 
-# Are we on a task bracnh:
 if [[ "$_BRANCH" == task/* ]]; then
 	_ISTASK=true
 else
 	_ISTASK=false
 fi
 
-task () {
-	echo wrapper function
-	exit 1
+_start() {
+	git checkout master
+	git checkout -b task/$1
 }
 
-: <<'END'
 # Start a new task
-if [ "$1" = "start" ]; then
-	if [ !$2 ]; then
+if [ "$1" = "start" -o "$1" = "new" ]; then
+	if [ -z "$2" ]; then
 		echo "ERR: Specify a branch name for this task" && exit 1
 	fi
 	git checkout master
 	git checkout -b task/$2
 	exit 0
 # Merge work into dev
-elif [ "$1" = "dev" ]; then
+elif [ "$1" = "dev" -o "$1" = "-d" ]; then
 	if [ !$_ISTASK ]; then
 		echo "ERR: You must be on a task branch to run this command" && exit 1
 	fi
 	echo "Merge ’$_BRANCH‘ into dev branch" 
 	exit 0
 # Merge work into qa and dev
-elif [ "$1" = "qa" ]; then
+elif [ "$1" = "qa" -o "$1" = "-q" ]; then
 	if [ !$_ISTASK ]; then
 		echo "ERR: You must be on a task branch to run this command" && exit 1
 	fi
 	echo "Merge ’$_BRANCH‘ into qa, and dev branch"
 	exit 0
 # Merge work into stage, qa, and dev
-elif [ "$1" = "stage" ]; then
+elif [ "$1" = "stage" -o "$1" = "-s" ]; then
 	if [ !$_ISTASK ]; then
 		echo "ERR: You must be on a task branch to run this command" && exit 1
 	fi
 	echo "Merge ’$_BRANCH‘ into stage, qa, and dev branch" && exit 0
 
 # Merge work into master, stage, qa, and dev
-elif [ "$1" = "finish" ]; then
+elif [ "$1" = "finish" -o "$1" = "-f" ]; then
 	if [ !$_ISTASK ]; then
 		echo "ERR: You must be on a task branch to run this command" && exit 1
 	fi
 	echo "Merge '$_BRANCH' into master, stage, qa, and dev branch" && exit 0
 
+# Merge work into dev
+elif [ "$1" = "help" -o "$1" = "-h" ]; then
+	echo "Available Commands:"
+	read -d '' help <<- EOF
+	Command line utility functions for git-task
+
+	usage: git task [command] [parameter]
+
+	available commands:
+
+	start [name]
+	start new task branch called [name]
+
+	dev
+	merge current task branch into dev
+
+	qa
+	merge current task branch into qa and dev
+
+	stage
+	merge current task branch into stage, qa, and dev
+
+	finish
+	merge current task branch into master, stage, qa, and dev, then delete task branch
+
+	home page: https://github.com/mikeweitz/git-task
+	EOF
+	echo "$help"
+	exit 0
+
 # Not a valid command
 else
 	echo "Command ‘$1’ not found" && exit 1
 fi
-END
