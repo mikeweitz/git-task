@@ -11,19 +11,20 @@ Permanent environment branches are never worked on direcly.  Instead, individual
  - Decouple features from the environemnt it lives on.
  - Improve ease of escalating individual features and fixes through qa / stage / production.
  - Reduce or remove new feature polution by basing new work off of production code
- - Resolve issues with environemnts falling out of sync.  If a task is edited while on stage, but not merged back down to qa and dev, those edits will be captured with the nest task
+ - Resolve issues with environemnts falling out of sync.  If a task is edited while on stage, but not merged back down to qa and dev, those missing changes should be captures in the next round of tasks
 
 
 ## Questions moving forward
-  - Should task branches be merged into master, or should master only pull from Stage? This is mostly a question of how production code is reviewd. We want to deploy code that's been reviewd 'in browser'.
-  - Can a code review system be implemented similar to a 'pull request' where develoeprs do not merge their own features into setage / master?
+  - Should there be a "production" branch, or should master serve that purpose?
+  - Should tasks be merged into the production branch, or should it pull from STG branch? 
 
 
 ## Environment Branches
 Each branch reflects a server environment
- - Master: Production code
- - Stage: Client review
- - QA: Internal QA team review
+ - Master: The default git branch - this is the source branch for new tasks
+ - Prd: The code that is deployed to live servers
+ - Stage: Client review site
+ - QA: Internal QA group review environment
  - Dev: developer environment for testing new code 
 
 
