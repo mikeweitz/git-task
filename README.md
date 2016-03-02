@@ -1,6 +1,6 @@
 Git Task
 ==========
-A task-driven methodology for using git in marketing driven environments.
+A methodology for using git in marketing driven environments.
 
 The two dominant git methodologies in practice are focused on either a software 'release' cycle (git flow), or a constant deployment cycle (git hub).  Both are geared towards companies that ship product. The core premise of this approach is attaining feature-independance: where task can be moved through review and into production independant of one another.  
 
@@ -8,14 +8,14 @@ Permanent environment branches are never worked on direcly.  Instead, individual
 
 
 ## Issues this method attempts to address
- - Decouple code from the environemnt it lives on.
+ - Decouple features from the environemnt it lives on.
  - Improve ease of escalating individual features and fixes through qa / stage / production.
  - Reduce or remove new feature polution by basing new work off of production code
- - Resolve issues with environemnts falling out of sync.  If a task is edited while on stage, but not merged back down to qa and dev, those edits will be captured in the next task
+ - Resolve issues with environemnts falling out of sync.  If a task is edited while on stage, but not merged back down to qa and dev, those edits will be captured with the nest task
 
 
 ## Questions moving forward
-  - Should features be merged into master, or should master only pull from Stage? This is mostly a question of how production code is reviewd. We want to deploy code that's been reviewd 'in browser'.
+  - Should task branches be merged into master, or should master only pull from Stage? This is mostly a question of how production code is reviewd. We want to deploy code that's been reviewd 'in browser'.
   - Can a code review system be implemented similar to a 'pull request' where develoeprs do not merge their own features into setage / master?
 
 
@@ -38,7 +38,7 @@ A task branch is any change to the codebase: New features, bugfixes, enhancement
 
 ## Basic Workflow
 #### New features
-Create a new task branch off of master.
+Create new task branches off of master.
 Edit your code, committing as necessary.
 When you're satisfied with your work, checkout Dev branch, and merge in the task branch.
 If the code checks out, the task branch is then merged into QA for internal testing.
@@ -50,9 +50,8 @@ After final signoff, the task branch is merged into Master.  The task branch can
 #### Urgent bugfix
 There's no difference in process - create the task, and progressively merge into environment branches.
 
-
-## CLI
-There's a shell script included in the repo that provides some command line utilities for using the workflow.
+## Command Line Interface
+There's an in-progress shell script included in the repo that provides some command line utilities for using the workflow.
 These helpers will create new task branhces off of master, merge task branches into environment branches as designated, and finsih task branches by merging into master and clearning up the branch.
 
 
